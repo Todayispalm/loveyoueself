@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Mai 💛</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    font-family: "Arial", sans-serif;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ffe6ee,#fff8d9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.page{
+    display:none;
+    text-align:center;
+    width:90%;
+    max-width:500px;
+    animation:fade 1s;
+}
+
+.active{
+    display:block;
+}
+
+h1{
+    color:#ff7fa8;
+    font-size:40px;
+}
+
+p{
+    font-size:22px;
+    line-height:1.7;
+    color:#555;
+}
+
+button{
+    margin-top:25px;
+    padding:15px 35px;
+    border:none;
+    border-radius:30px;
+    background:#ff9fba;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 5px 15px #ddd;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.question{
+    background:white;
+    padding:25px;
+    border-radius:25px;
+}
+
+.option{
+    display:block;
+    width:100%;
+    margin:10px 0;
+    background:#fff0f5;
+    color:#555;
+}
+
+.count{
+    font-size:80px;
+    color:#ff8fab;
+    animation:zoom 1s;
+}
+
+.answer p{
+    opacity:0;
+    animation:show 1s forwards;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+@keyframes zoom{
+    from{
+        transform:scale(0);
+    }
+    to{
+        transform:scale(1);
+    }
+}
+
+@keyframes show{
+    to{
+        opacity:1;
+    }
+}
+
+.after-message{
+
+display:none;
+
+font-size:22px;
+
+line-height:1.8;
+
+margin-top:25px;
+
+animation:fade 2s;
+
+}
+}</style>
+
+</head>
+
+
+<div class="page" id="video">
+
+<h1>
+🎁 ของขวัญสำหรับ Mai 💛
+</h1>
+
+<video id="birthdayVideo" width="100%" controls>
+
+<source src="iku.MP4" type="video/mp4">
+
+</video>
+
+
+<div id="afterVideo" class="after-message">
+
+💛 ขอบคุณที่ดูจนจบนะมาย 💛
+<br><br>
+พี่อยากให้มายรู้ว่า...
+<br>
+มายเป็นคนที่เก่งมาก ๆ เลยนะ
+<br><br>
+ขอให้อายุ 20 ปี
+มีแต่ความสุข รอยยิ้ม
+และเรื่องดี ๆ เข้ามาในชีวิต
+พี่จะอยู่ข้างๆมายเป็นกำลังใจให้มายเสมอ 
+รักมายมากนะ 🌼
+
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+<!-- หน้าเปิด -->
+
+<div class="page active" id="home">
+
+<h1>ทบทวนตัวเองอีกครั้ง💛</h1>
+
+<p>
+คุณเติบโตขึ้นมาอย่างดี...
+<br>
+คุณภูมิใจในตัวเองบ้างหรือยัง😊
+</p>
+
+<button onclick="startQuiz()">
+เริ่มเลย 💛
+</button>
+
+</div>
+
+
+
+<!-- คำถาม -->
+
+<div class="page" id="quiz">
+
+<div class="question">
+
+<h2 id="questionText"></h2>
+
+<div id="options"></div>
+
+</div>
+
+</div>
+
+
+
+
+<!-- Countdown -->
+
+<div class="page" id="countdown">
+
+<h1>
+มีบางย่างอยากให้ดู...
+</h1>
+
+<div class="count" id="number">
+3
+</div>
+
+</div>
+
+
+
+
+<!-- เฉลย -->
+<div class="page answer" id="answer">
+
+<p style="animation-delay:0s">
+มาย…
+</p>
+
+<p style="animation-delay:1.5s">
+จริง ๆ แล้ว…
+</p>
+
+<p style="animation-delay:3s">
+คำถามทั้งหมด
+</p>
+
+<p style="animation-delay:4.5s">
+ไม่มีคำตอบที่ถูกหรือผิด
+</p>
+
+<p style="animation-delay:6s">
+พี่แค่อยากให้มาย
+</p>
+
+<p style="animation-delay:7.5s">
+หยุดมองย้อนกลับไป
+</p>
+
+<p style="animation-delay:9s">
+และเห็นว่า
+</p>
+
+<p style="animation-delay:10.5s">
+มายเก่งมากแล้ว 💛
+</p>
+
+
+<button onclick="gift()">
+ 💝ลองกดตรงนี้ดูสิ
+</button>
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+let currentQuestion = 0;
+
+
+let questions=[
+
+{
+q:"ปีนี้คุณอายุเท่าไหร่?",
+a:["18","19","20","21"]
+},
+
+{
+q:"คุณคิดว่าตัวเองเก่งไหม?",
+a:["ไม่ค่อย","บางครั้ง","เก่งมาก","ไม่รู้"]
+},
+
+{
+q:"ปีที่ผ่านมาเหนื่อยไหม?",
+a:["มาก","นิดหน่อย","ไม่เลย","ทุกวัน"]
+},
+
+{
+q:"ถ้ามองย้อนกลับไป คุณภูมิใจไหม?",
+a:["ไม่","นิดหน่อย","มาก","ที่สุด"]
+},
+
+{
+q:"พร้อมหรือยัง",
+a:["พร้อม 💛","ยัง","ไม่แน่ใจ","แน่นอน"]
+}
+
+];
+
+
+
+function showPage(id){
+
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+}
+
+
+
+function startQuiz(){
+
+currentQuestion=0;
+
+showQuestion();
+
+showPage("quiz");
+
+}
+
+
+
+function showQuestion(){
+
+let q=questions[currentQuestion];
+
+document.getElementById("questionText").innerHTML=q.q;
+
+
+let box=document.getElementById("options");
+
+box.innerHTML="";
+
+
+q.a.forEach(text=>{
+
+let btn=document.createElement("button");
+
+btn.className="option";
+
+btn.innerHTML=text;
+
+
+btn.onclick=function(){
+
+nextQuestion();
+
+};
+
+
+box.appendChild(btn);
+
+
+});
+
+
+}
+
+
+
+
+function nextQuestion(){
+
+currentQuestion++;
+
+
+if(currentQuestion < questions.length){
+
+showQuestion();
+
+}else{
+
+startCountdown();
+
+}
+
+}
+
+
+
+
+function startCountdown(){
+
+showPage("countdown");
+
+
+let number=document.getElementById("number");
+
+let count=3;
+
+
+let timer=setInterval(()=>{
+
+count--;
+
+number.innerHTML=count;
+
+
+if(count==0){
+
+clearInterval(timer);
+
+showPage("answer");
+
+}
+
+
+},1000);
+
+
+}
+
+
+
+function gift(){
+
+showPage("video");
+
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+
+let video = document.getElementById("birthdayVideo");
+
+if(video){
+
+video.addEventListener("ended", function(){
+
+video.style.display="none";
+
+document.getElementById("afterVideo").style.display="block";
+
+});
+
+}
+
+});</script> 
+
+
+</body><div id="hearts"></div>
+</html>
